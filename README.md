@@ -593,16 +593,28 @@ pytest tests/ --benchmark-only
 
 ---
 
+---
+
 ## 📄 License
 
-Proprietary - All rights reserved
+**Proprietary** - All rights reserved.
+
+This software and associated documentation files are proprietary and confidential. Unauthorized copying, modification, distribution, or use of this software, via any medium, is strictly prohibited.
 
 ---
 
 <div align="center">
 
-**Built with ❤️ for production ML workloads**
+### Contributing & Support
 
-[⭐ Star this repo](https://github.com/Amankhan2370/llm-inference-engine) • [🐛 Report Bug](https://github.com/Amankhan2370/llm-inference-engine/issues) • [💡 Request Feature](https://github.com/Amankhan2370/llm-inference-engine/issues)
+For questions, bug reports, or feature requests, please open an issue on GitHub.
+
+**Repository**: [llm-inference-engine](https://github.com/Amankhan2370/llm-inference-engine)  
+**Issues**: [Report Bug](https://github.com/Amankhan2370/llm-inference-engine/issues) | [Request Feature](https://github.com/Amankhan2370/llm-inference-engine/issues)
+
+---
+
+**Production-Ready LLM Inference Engine**  
+*Optimized for high-throughput, low-latency inference serving*
 
 </div>
