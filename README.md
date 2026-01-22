@@ -3,8 +3,10 @@
 # 🚀 LLM Inference Engine
 
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.104-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![C++](https://img.shields.io/badge/C++-17-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://isocpp.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Terraform](https://img.shields.io/badge/Terraform-Infrastructure-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Redis](https://img.shields.io/badge/Redis-Cache-DC382D?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io/)
 
@@ -30,6 +32,24 @@
 | 🚀 **High Performance** | Optimized for 1200+ QPS with low latency | ✅ Production |
 | 📈 **Observability** | Comprehensive logging and metrics | ✅ Production |
 | 🐳 **Containerized** | Docker & docker-compose ready | ✅ Production |
+
+</div>
+
+---
+
+## 🛠️ Tech Stack
+
+<div align="center">
+
+| Category | Technologies |
+|----------|-------------|
+| **Languages** | Python, C++ |
+| **ML Framework** | PyTorch |
+| **Infrastructure** | Terraform |
+| **Backend** | FastAPI, Uvicorn |
+| **Caching** | Redis, In-Memory |
+| **Containerization** | Docker, Docker Compose |
+| **Monitoring** | Prometheus, Metrics |
 
 </div>
 
@@ -458,6 +478,15 @@ llm-inference-engine/
 │   └── metrics.py             # Metrics collection & Prometheus
 ├── 📂 config/
 │   └── settings.py            # Configuration management
+├── 📂 infra/
+│   └── terraform/             # Infrastructure as Code (Terraform)
+│       ├── main.tf
+│       ├── variables.tf
+│       └── outputs.tf
+├── 📂 cpp/
+│   └── optimizations/         # C++ performance optimizations
+│       ├── batch_processor.cpp
+│       └── tensor_ops.cpp
 ├── 📂 scripts/
 │   └── run_local.sh           # Local run script
 ├── 📂 tests/
@@ -469,6 +498,13 @@ llm-inference-engine/
 ├── 🐳 docker-compose.yml       # Docker Compose config
 └── 📖 README.md               # This file
 ```
+
+### Technology Contributions
+
+- **Python**: Core application logic, API server, async processing
+- **C++**: Performance-critical operations, tensor operations, batch processing optimizations
+- **PyTorch**: Model loading, inference runtime, token generation
+- **Terraform**: Infrastructure provisioning, cloud deployment automation
 
 ---
 
