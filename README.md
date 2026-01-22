@@ -5,10 +5,15 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![C++](https://img.shields.io/badge/C++-17-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://isocpp.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![Terraform](https://img.shields.io/badge/Terraform-Infrastructure-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Uvicorn](https://img.shields.io/badge/Uvicorn-ASGI-009688?style=for-the-badge)](https://www.uvicorn.org/)
+[![AsyncIO](https://img.shields.io/badge/AsyncIO-Asynchronous-3776AB?style=for-the-badge&logo=python&logoColor=white)]()
 [![Redis](https://img.shields.io/badge/Redis-Cache-DC382D?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)](https://prometheus.io/)
+[![Terraform](https://img.shields.io/badge/Terraform-Infrastructure-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![pytest](https://img.shields.io/badge/pytest-Testing-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)](https://pytest.org/)
+[![CUDA](https://img.shields.io/badge/CUDA-GPU-76B900?style=for-the-badge&logo=nvidia&logoColor=white)](https://developer.nvidia.com/cuda-toolkit)
 
 **Production-ready LLM inference and serving system with dynamic batching, caching, and high-throughput capabilities**
 
@@ -39,19 +44,37 @@
 
 ## 🛠️ Tech Stack
 
-<div align="center">
+### Core Technologies
 
-| Category | Technologies |
-|----------|-------------|
-| **Languages** | Python, C++ |
-| **ML Framework** | PyTorch |
-| **Infrastructure** | Terraform |
-| **Backend** | FastAPI, Uvicorn |
-| **Caching** | Redis, In-Memory |
-| **Containerization** | Docker, Docker Compose |
-| **Monitoring** | Prometheus, Metrics |
+| Category | Technology | Purpose |
+|----------|-----------|---------|
+| **Language** | Python 3.10+ | Core application logic and API server |
+| **Language** | C++ | Performance-critical operations and optimizations |
+| **ML Framework** | PyTorch | Model loading, inference runtime, token generation |
+| **API Framework** | FastAPI | High-performance async API server |
+| **ASGI Server** | Uvicorn | Production ASGI server for FastAPI |
+| **Async Runtime** | AsyncIO | Concurrent request handling and async processing |
+| **Caching** | Redis | Distributed caching for inference results |
+| **Containerization** | Docker | Application containerization |
+| **Orchestration** | Docker Compose | Multi-container deployment |
+| **Monitoring** | Prometheus | Metrics collection and monitoring |
+| **Infrastructure** | Terraform | Infrastructure as Code for cloud deployment |
+| **Testing** | pytest | Unit and integration testing |
+| **GPU Computing** | CUDA | GPU acceleration for model inference |
 
-</div>
+### Technology Integration
+
+- **Python 3.10+**: Core language with modern async/await support for high-concurrency serving
+- **C++**: Performance-critical tensor operations, batch processing optimizations, and low-level optimizations
+- **PyTorch**: Model loading from HuggingFace, inference runtime with FP16/BF16 support, and token generation
+- **FastAPI + Uvicorn**: Async API server with automatic OpenAPI documentation and high-performance request handling
+- **AsyncIO**: Enables parallel processing of requests with configurable concurrency limits
+- **Redis**: Distributed caching layer reducing LLM API calls and improving response times for repeated queries
+- **Docker + Docker Compose**: Containerized deployment for consistent environments across development and production
+- **Prometheus**: Real-time metrics collection for QPS, latency percentiles, error rates, and system resources
+- **Terraform**: Infrastructure provisioning and automation for cloud deployments (AWS, GCP, Azure)
+- **pytest**: Comprehensive test suite for inference engine, batching, caching, and metrics components
+- **CUDA**: GPU acceleration for model inference, enabling 10-100x speedup over CPU for transformer models
 
 ---
 
