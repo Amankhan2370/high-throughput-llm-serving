@@ -73,36 +73,80 @@ graph TB
     style Q fill:#FFA500
 ```
 
-### Request Flow
+### Request Flow with Dynamic Batching
 
 ```mermaid
 sequenceDiagram
-    participant Client
-    participant API
-    participant Queue
-    participant Batcher
-    participant Cache
-    participant Runtime
-    participant Metrics
+    participant C1 as Client 1
+    participant C2 as Client 2
+    participant C3 as Client N
+    participant API as FastAPI Server
+    participant Sem as Semaphore<br/>(Concurrency)
+    participant Q as Request Queue
+    participant B as Dynamic Batcher
+    participant T as Batch Timer
+    participant Cache as Cache Layer
+    participant RT as PyTorch Runtime
+    participant M as Metrics
     
-    Client->>API: POST /api/v1/infer
-    API->>Queue: Add Request
-    Queue->>Batcher: Batch Ready?
-    
-    alt Batch Ready
-        Batcher->>Cache: Check Cache
-        alt Cache Hit
-            Cache->>Batcher: Return Cached
-        else Cache Miss
-            Batcher->>Runtime: Generate
-            Runtime->>Batcher: Tokens
-            Batcher->>Cache: Store Result
-        end
-        Batcher->>Client: Response
+    par Concurrent Requests
+        C1->>API: POST /infer (Request 1)
+        C2->>API: POST /infer (Request 2)
+        C3->>API: POST /infer (Request N)
     end
     
-    API->>Metrics: Record Latency
-    Metrics->>Metrics: Update Stats
+    API->>Sem: Acquire Slot
+    alt Slot Available
+        Sem->>API: Granted
+        API->>Q: Enqueue Request
+        Q->>Q: Check Queue Size
+        
+        alt Queue Full
+            Q->>API: 503 Backpressure
+            API->>C1: Error Response
+        else Queue Available
+            Q->>B: Add to Batch Queue
+            B->>T: Start/Reset Timer
+            
+            alt Batch Size Reached
+                T->>B: Trigger Batch
+            else Timer Expired
+                T->>B: Trigger Batch
+            end
+            
+            B->>Cache: Batch Cache Lookup
+            alt Cache Hit (All)
+                Cache->>B: Return Cached Results
+            else Cache Miss (Partial)
+                Cache->>B: Partial Results
+                B->>RT: Batch Inference Request
+                RT->>RT: Tokenize Batch
+                RT->>RT: Model Forward Pass
+                RT->>RT: Generate Tokens
+                RT->>B: Batch Tokens
+                B->>Cache: Store New Results
+            else Cache Miss (All)
+                B->>RT: Batch Inference Request
+                RT->>RT: Process Batch (32 requests)
+                RT->>B: Batch Tokens
+                B->>Cache: Store All Results
+            end
+            
+            B->>Q: Batch Complete
+            Q->>API: Return Responses
+            API->>Sem: Release Slot
+            API->>C1: Response 1
+            API->>C2: Response 2
+            API->>C3: Response N
+            
+            API->>M: Record Metrics
+            M->>M: Update QPS, Latency
+            M->>M: Calculate p50/p95/p99
+        end
+    else Slot Unavailable
+        Sem->>API: Rejected
+        API->>C1: 503 Service Unavailable
+    end
 ```
 
 ### Component Architecture
