@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  llm-inference:
+    build: .
+    container_name: llm-inference-engine
+    ports:
+      - "8000:8000"
+      - "9090:9090"
+    environment:
+      - MODEL_NAME=${MODEL_NAME}
+      - MODEL_PATH=${MODEL_PATH}
+      - DEVICE=${DEVICE:-cuda}
+      - REDIS_URL=${REDIS_URL}
+      - CACHE_TYPE=${CACHE_TYPE:-memory}
+    volumes:
+      - ./models:/app/models
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
